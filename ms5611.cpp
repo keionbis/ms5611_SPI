@@ -31,13 +31,13 @@ unsigned long ms5611::cmd_adc(char cmd){
 	SPI.beginTransaction(settingsA);
 	digitalWriteFast(this->_cs, LOW);
 	SPI.transfer(CMD_ADC_CONV+cmd);
-	switch (cmd & 0x0f) // wait necessary conversion time
+	switch (cmd & 0x0f) // wait necessary conversion time. Max time for ADC used to be safe.
 	{
-	case CMD_ADC_256 : delayMicroseconds(900); break;
-	case CMD_ADC_512 : delayMicroseconds(3); break;
-	case CMD_ADC_1024: delayMicroseconds(4); break;
-	case CMD_ADC_2048: delayMicroseconds(6); break;
-	case CMD_ADC_4096: delayMicroseconds(10); break;
+	case CMD_ADC_256 : delayMicroseconds(600); break;
+	case CMD_ADC_512 : delayMicroseconds(1170); break;
+	case CMD_ADC_1024: delayMicroseconds(2280); break;
+	case CMD_ADC_2048: delayMicroseconds(4540); break;
+	case CMD_ADC_4096: delayMicroseconds(9040); break;
 	}
 	digitalWriteFast(this->_cs, LOW);
 	digitalWriteFast(this->_cs,LOW);
